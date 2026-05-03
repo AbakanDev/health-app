@@ -129,7 +129,7 @@
                 android:layout_marginHorizontal="32dp"
                 android:layout_marginTop="32dp"
                 android:background="@drawable/img_blue_round_bg_login"
-                android:hint="Tên tài khoản"
+                android:hint="Căn cước công dân"
                 android:paddingHorizontal="24dp"
                 android:drawableStart="@drawable/img_email"
                 android:drawablePadding="12dp"
