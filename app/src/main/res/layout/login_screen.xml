@@ -193,14 +193,17 @@
                     android:textColor="#333333"
                     android:textSize="14sp" />
 
-            <TextView
-                    android:id="@+id/tv_register"
+            <Button
+                    android:id="@+id/btn_register"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Đăng ký ngay!"
                     android:textColor="@color/darkbluemint"
                     android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textAllCaps="false"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:background="?attr/selectableItemBackground"/>
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
