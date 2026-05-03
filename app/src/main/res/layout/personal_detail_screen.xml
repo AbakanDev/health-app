@@ -222,40 +222,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/labelAddress" />
 
-            <!-- 4. Căn Cước Công Dân -->
-            <TextView
-                    android:id="@+id/labelCCCD"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="16dp"
-                    android:text="Căn Cước Công Dân"
-                    android:textColor="@color/darkbluemint"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/edtAddress" />
-
-            <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/edtCCCD"
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:layout_marginHorizontal="24dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/img_blue_round_bg_login"
-                    android:backgroundTint="@null"
-                    android:hint="077777777777"
-                    android:inputType="number"
-                    android:paddingHorizontal="20dp"
-                    android:textColor="@color/darkbluemint"
-                    android:textColorHint="@color/darklightbluemint"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/labelCCCD" />
-
-            <!-- 5. Email -->
+            <!-- 4. Email -->
             <TextView
                     android:id="@+id/labelEmail"
                     android:layout_width="wrap_content"
@@ -267,7 +234,7 @@
                     android:textSize="14sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/edtCCCD" />
+                    app:layout_constraintTop_toBottomOf="@id/edtAddress" />
 
             <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/edtEmail"
@@ -287,7 +254,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/labelEmail" />
 
-            <!-- 6. Số điện thoại -->
+            <!-- 5. Số điện thoại -->
             <TextView
                     android:id="@+id/labelPhone"
                     android:layout_width="wrap_content"
