@@ -64,9 +64,8 @@ class RegisterActivity : AppCompatActivity() {
 
             val requestBody = jsonString.toRequestBody("application/json; charset=utf-8".toMediaTypeOrNull())
 
-            // Thay đổi IP này thành IP máy tính của bạn (nếu chạy máy thật)
-            // Hoặc 10.0.2.2 nếu chạy Emulator
-            val url = "http://10.0.2.2:3000/api/register"
+            // SỬ DỤNG CONSTANTS THAY VÌ LINK CỨNG
+            val url = Constants.REGISTER_URL
 
             val request = Request.Builder()
                 .url(url)
