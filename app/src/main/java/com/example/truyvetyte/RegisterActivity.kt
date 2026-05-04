@@ -15,6 +15,7 @@ class RegisterActivity : AppCompatActivity() {
         btnBack.setOnClickListener {
             // Chuyển từ trang hiện tại (this) sang FriendActivity
             val intent = Intent(this, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
             startActivity(intent)
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         }
