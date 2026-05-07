@@ -133,7 +133,10 @@
                             android:textColor="@color/darkbluemint"
                             android:textStyle="bold"
                             android:textColorHint="@color/darklightbluemint"
-                            android:textSize="14sp" />
+                            android:textSize="14sp"
+                            android:focusable="false"
+                            android:clickable="true"
+                            android:cursorVisible="false"/>
                 </LinearLayout>
 
                 <!-- Khoảng cách giữa 2 cột -->

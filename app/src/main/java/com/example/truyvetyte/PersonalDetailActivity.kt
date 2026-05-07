@@ -1,5 +1,6 @@
 package com.example.truyvetyte
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.RadioButton
@@ -13,6 +14,7 @@ import com.example.truyvetyte.network.RetrofitClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.Calendar
 
 class PersonalDetailActivity : AppCompatActivity() {
 
@@ -36,6 +38,27 @@ class PersonalDetailActivity : AppCompatActivity() {
         val edtPhone = findViewById<AppCompatEditText>(R.id.edtPhone)
         val btnSubmit = findViewById<ImageView>(R.id.btnSubmit)
         val btnBack = findViewById<ImageView>(R.id.btnBack)
+
+        edtDob.setOnClickListener {
+            val calendar = Calendar.getInstance()
+            val year = calendar.get(Calendar.YEAR)
+            val month = calendar.get(Calendar.MONTH)
+            val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+            val datePickerDialog = DatePickerDialog(
+                this,
+                { _, selectedYear, selectedMonth, selectedDay ->
+                    val formattedMonth = String.format("%02d", selectedMonth + 1)
+                    val formattedDay = String.format("%02d", selectedDay)
+                    val dateString = "$selectedYear-$formattedMonth-$formattedDay"
+                    edtDob.setText(dateString)
+                },
+                year, month, day
+            )
+            // Không cho phép chọn ngày trong tương lai
+            datePickerDialog.datePicker.maxDate = System.currentTimeMillis()
+            datePickerDialog.show()
+        }
 
         btnBack.setOnClickListener {
             finish() // Quay lại màn hình trước
