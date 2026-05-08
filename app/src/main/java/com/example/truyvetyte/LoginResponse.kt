@@ -10,7 +10,7 @@ data class LoginResponse(
 
 data class UserData(
     val cccd: String,
-    @SerializedName("fullName")
+    @SerializedName("full_name")
     val fullName: String?,
     val email: String?,
     val phone: String?
