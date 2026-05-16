@@ -15,25 +15,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Ánh xạ ID của TextView hiển thị lời chào
-        val tvGreeting = findViewById<TextView>(R.id.tv_greeting)
-
-        // Nhận tên người dùng từ LoginActivity gửi qua (thông qua Intent)
-        val fullName = intent.getStringExtra("USER_NAME")
-
-        // Kiểm tra xem có nhận được tên không để hiển thị cho phù hợp
-        if (fullName != null) {
-            tvGreeting.text = "Xin chào $fullName!"
-        } else {
-            tvGreeting.text = "Xin chào!"
-        }
-        // --- KẾT THÚC CODE BƯỚC 3 ---
-
-        // Tự động test kết nối ngay khi vào màn hình này (CODE CŨ GIỮ NGUYÊN)
         testBackendConnection()
     }
 
-    // CODE CŨ CỦA BẠN GIỮ NGUYÊN HOÀN TOÀN BÊN DƯỚI NÀY
     private fun testBackendConnection() {
         // Đẩy việc gọi mạng ra luồng IO ngầm
         lifecycleScope.launch(Dispatchers.IO) {

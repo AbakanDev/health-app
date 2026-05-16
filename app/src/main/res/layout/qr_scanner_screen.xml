@@ -65,7 +65,7 @@
         <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/img_qr_placeholder"
+                android:src="@drawable/qr_bg_white_circle"
                 android:scaleType="fitCenter"
                 android:layout_margin="10dp"/>
 
