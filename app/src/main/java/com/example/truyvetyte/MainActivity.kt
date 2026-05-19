@@ -3,15 +3,11 @@ package com.example.truyvetyte
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.truyvetyte.network.RetrofitClient
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -39,18 +35,22 @@ class MainActivity : AppCompatActivity() {
         val btnLichSu = findViewById<ImageButton>(R.id.btn_history)
         val btnDichTe = findViewById<ImageButton>(R.id.btn_epidemiology)
         val btnKhaiBao = findViewById<ImageButton>(R.id.btn_health_form)
+        val btnKhaiBao2 = findViewById<ImageButton>(R.id.btn_xnc)
         // Trong onCreate, bạn gọi hàm này khi bấm vào các nút ở Bottom Nav
         btnXuHuong.setOnClickListener {
             replaceFragment(XuHuong())
         }
         btnLichSu.setOnClickListener {
-            replaceFragment(LichSu())
+            replaceFragment(LichSuTruyVet())
         }
         btnDichTe.setOnClickListener {
             replaceFragment(DichTe())
         }
         btnKhaiBao.setOnClickListener {
             replaceFragment(KhaiBao())
+        }
+        btnKhaiBao2.setOnClickListener {
+            replaceFragment(KhaiBao2())
         }
         // Xử lý khi app vừa mở lên
         handleIntent(intent)

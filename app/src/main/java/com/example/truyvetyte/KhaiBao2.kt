@@ -20,7 +20,7 @@ class KhaiBao2 : Fragment() {
 
         // 1. Tìm nút bấm trong layout của Fragment (Trang 1)
         // Giả sử nút đó có ID là btnHoanTat
-        val btnGo = view.findViewById<Button>(R.id.btnHoanTat)
+        val btnGo = view.findViewById<Button>(R.id.btnHoanTat2)
 
         // 2. Thiết lập click
         btnGo.setOnClickListener {
