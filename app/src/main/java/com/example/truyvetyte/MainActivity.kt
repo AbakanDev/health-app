@@ -3,15 +3,11 @@ package com.example.truyvetyte
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.truyvetyte.network.RetrofitClient
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -45,7 +41,7 @@ class MainActivity : AppCompatActivity() {
             replaceFragment(XuHuong())
         }
         btnLichSu.setOnClickListener {
-            replaceFragment(LichSu())
+            replaceFragment(LichSuTruyVet())
         }
         btnDichTe.setOnClickListener {
             replaceFragment(DichTe())
