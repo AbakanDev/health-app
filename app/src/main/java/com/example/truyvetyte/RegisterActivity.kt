@@ -19,8 +19,10 @@ class RegisterActivity : AppCompatActivity() {
         btnBack.setOnClickListener {
             // Chuyển từ trang hiện tại (this) sang FriendActivity
             val intent = Intent(this, LoginActivity::class.java)
+            // Thêm dòng này để xóa sạch các trang đang nằm trong bộ nhớ (Backstack)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
             startActivity(intent)
+            // Đừng quên gọi animation ngược ở đây nếu bạn đã tạo file anim
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         }
 
