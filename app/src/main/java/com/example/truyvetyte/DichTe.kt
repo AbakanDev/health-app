@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import com.example.truyvetyte.model.XetNghiem
 import com.example.truyvetyte.network.RetrofitClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -53,6 +54,28 @@ class DichTe : Fragment() {
     private lateinit var tvLanXetNghiemMoiNhat: TextView
     private lateinit var tvNgayXetNghiemMoiNhat: TextView
 
+    // --- Khai báo View Xét Nghiệm ---
+    private lateinit var cvKetQuaMoiNhat: CardView
+    private lateinit var viewMauKetQua: View
+    private lateinit var tvChuaXetNghiem: TextView
+
+    private lateinit var layoutXetNghiem2: RelativeLayout
+    private lateinit var tvLanXN2: TextView
+    private lateinit var tvLoaiXN2: TextView
+    private lateinit var tvDiaDiemXN2: TextView
+    private lateinit var tvNgayXN2: TextView
+    private lateinit var cvBadgeXN2: CardView
+    private lateinit var tvKetQuaXN2: TextView
+
+    private lateinit var layoutXetNghiem1: RelativeLayout
+    private lateinit var tvLanXN1: TextView
+    private lateinit var tvLoaiXN1: TextView
+    private lateinit var tvDiaDiemXN1: TextView
+    private lateinit var tvNgayXN1: TextView
+    private lateinit var cvBadgeXN1: CardView
+    private lateinit var tvKetQuaXN1: TextView
+    private lateinit var dividerXetNghiem: View
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -65,6 +88,7 @@ class DichTe : Fragment() {
         // Gọi API lấy dữ liệu tiêm chủng
         fetchTiemChungData()
         fetchCachLyData()
+        fetchXetNghiemData()
 
         return view
     }
@@ -98,6 +122,31 @@ class DichTe : Fragment() {
         tvTrangThaiXetNghiem = view.findViewById(R.id.tvTrangThaiXetNghiem)
         tvLanXetNghiemMoiNhat = view.findViewById(R.id.tvLanXetNghiemMoiNhat)
         tvNgayXetNghiemMoiNhat = view.findViewById(R.id.tvNgayXetNghiemMoiNhat)
+        // Ánh xạ View Xét Nghiệm
+        cvKetQuaMoiNhat = view.findViewById(R.id.cvKetQuaMoiNhat)
+        viewMauKetQua = view.findViewById(R.id.viewMauKetQua)
+        tvTrangThaiXetNghiem = view.findViewById(R.id.tvTrangThaiXetNghiem)
+        tvLanXetNghiemMoiNhat = view.findViewById(R.id.tvLanXetNghiemMoiNhat)
+        tvNgayXetNghiemMoiNhat = view.findViewById(R.id.tvNgayXetNghiemMoiNhat)
+        tvChuaXetNghiem = view.findViewById(R.id.tvChuaXetNghiem)
+
+        layoutXetNghiem2 = view.findViewById(R.id.layoutXetNghiem2)
+        tvLanXN2 = view.findViewById(R.id.tvLanXN2)
+        tvLoaiXN2 = view.findViewById(R.id.tvLoaiXN2)
+        tvDiaDiemXN2 = view.findViewById(R.id.tvDiaDiemXN2)
+        tvNgayXN2 = view.findViewById(R.id.tvNgayXN2)
+        cvBadgeXN2 = view.findViewById(R.id.cvBadgeXN2)
+        tvKetQuaXN2 = view.findViewById(R.id.tvKetQuaXN2)
+
+        layoutXetNghiem1 = view.findViewById(R.id.layoutXetNghiem1)
+        tvLanXN1 = view.findViewById(R.id.tvLanXN1)
+        tvLoaiXN1 = view.findViewById(R.id.tvLoaiXN1)
+        tvDiaDiemXN1 = view.findViewById(R.id.tvDiaDiemXN1)
+        tvNgayXN1 = view.findViewById(R.id.tvNgayXN1)
+        cvBadgeXN1 = view.findViewById(R.id.cvBadgeXN1)
+        tvKetQuaXN1 = view.findViewById(R.id.tvKetQuaXN1)
+
+        dividerXetNghiem = view.findViewById(R.id.dividerXetNghiem)
     }
 
     // ================= LOGIC XỬ LÝ CÁCH LY =================
@@ -154,7 +203,6 @@ class DichTe : Fragment() {
         }
     }
 
-    // ================= LOGIC XỬ LÝ TIÊM CHỦNG (Giữ nguyên) =================
     private fun fetchTiemChungData() {
         val sharedPreferences = requireActivity().getSharedPreferences("AppPrefs", Context.MODE_PRIVATE)
         val token = sharedPreferences.getString("TOKEN", null)
@@ -239,6 +287,108 @@ class DichTe : Fragment() {
                     Toast.makeText(requireContext(), "Lỗi kết nối: ${e.message}", Toast.LENGTH_SHORT).show()
                 }
             }
+        }
+    }
+
+    // ================= LOGIC XỬ LÝ XÉT NGHIỆM =================
+    private fun fetchXetNghiemData() {
+        val sharedPreferences = requireActivity().getSharedPreferences("AppPrefs", Context.MODE_PRIVATE)
+        val token = sharedPreferences.getString("TOKEN", null)
+        val cccd = sharedPreferences.getString("CCCD", null)
+
+        if (token == null || cccd == null) return
+
+        val bearerToken = "Bearer $token"
+
+        lifecycleScope.launch(Dispatchers.IO) {
+            try {
+                val response = RetrofitClient.instance.getLichSuXetNghiem(bearerToken, cccd)
+
+                withContext(Dispatchers.Main) {
+                    if (response.isSuccessful && response.body() != null) {
+                        val xetNghiemResponse = response.body()!!
+                        if (xetNghiemResponse.success) {
+                            updateXetNghiemUI(xetNghiemResponse.data)
+                        } else {
+                            updateXetNghiemUI(emptyList())
+                        }
+                    } else {
+                        // Nếu backend trả về 404 (Không có dữ liệu), isSuccessful sẽ là false
+                        updateXetNghiemUI(emptyList())
+                    }
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(requireContext(), "Lỗi kết nối Xét nghiệm: ${e.message}", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun updateXetNghiemUI(danhSach: List<XetNghiem>) {
+        if (danhSach.isEmpty()) {
+            cvKetQuaMoiNhat.visibility = View.GONE
+            layoutXetNghiem1.visibility = View.GONE
+            layoutXetNghiem2.visibility = View.GONE
+            dividerXetNghiem.visibility = View.GONE
+            tvChuaXetNghiem.visibility = View.VISIBLE
+            return
+        }
+
+        tvChuaXetNghiem.visibility = View.GONE
+        cvKetQuaMoiNhat.visibility = View.VISIBLE
+
+        // 1. CẬP NHẬT KẾT QUẢ MỚI NHẤT (Vị trí 0 trong danh sách)
+        val latestTest = danhSach[0]
+        tvLanXetNghiemMoiNhat.text = "Lần ${latestTest.LanXetNghiem}"
+        tvNgayXetNghiemMoiNhat.text = latestTest.NgayXetNghiem
+
+        val isPositive = latestTest.KetQua.contains("Dương", ignoreCase = true)
+        if (isPositive) {
+            tvTrangThaiXetNghiem.text = "DƯƠNG TÍNH"
+            tvTrangThaiXetNghiem.setTextColor(Color.parseColor("#EF5350")) // Đỏ
+            viewMauKetQua.setBackgroundColor(Color.parseColor("#EF5350"))
+        } else {
+            tvTrangThaiXetNghiem.text = "ÂM TÍNH"
+            tvTrangThaiXetNghiem.setTextColor(Color.parseColor("#4CAF50")) // Xanh
+            viewMauKetQua.setBackgroundColor(Color.parseColor("#4CAF50"))
+        }
+
+        // 2. CẬP NHẬT LỊCH SỬ XÉT NGHIỆM (Tối đa hiển thị 2 mốc)
+        layoutXetNghiem1.visibility = View.GONE
+        layoutXetNghiem2.visibility = View.GONE
+        dividerXetNghiem.visibility = View.GONE
+
+        // Đổ dữ liệu mới nhất vào layout2 (nằm trên cùng trong XML)
+        if (danhSach.size >= 1) {
+            layoutXetNghiem2.visibility = View.VISIBLE
+            bindLichSuItem(danhSach[0], tvLanXN2, tvLoaiXN2, tvDiaDiemXN2, tvNgayXN2, cvBadgeXN2, tvKetQuaXN2)
+        }
+
+        // Đổ dữ liệu cũ hơn vào layout1 (nằm dưới cùng trong XML)
+        if (danhSach.size >= 2) {
+            dividerXetNghiem.visibility = View.VISIBLE
+            layoutXetNghiem1.visibility = View.VISIBLE
+            bindLichSuItem(danhSach[1], tvLanXN1, tvLoaiXN1, tvDiaDiemXN1, tvNgayXN1, cvBadgeXN1, tvKetQuaXN1)
+        }
+    }
+
+    private fun bindLichSuItem(
+        xn: XetNghiem,
+        tvLan: TextView, tvLoai: TextView, tvDiaDiem: TextView,
+        tvNgay: TextView, cvBadge: CardView, tvKetQua: TextView
+    ) {
+        tvLan.text = "Lần ${xn.LanXetNghiem}"
+        tvLoai.text = xn.LoaiXetNghiem
+        tvDiaDiem.text = xn.DiaDiemXetNghiem ?: "Không rõ cơ sở"
+        tvNgay.text = xn.NgayXetNghiem
+        tvKetQua.text = xn.KetQua
+
+        val isPositive = xn.KetQua.contains("Dương", ignoreCase = true)
+        if (isPositive) {
+            cvBadge.setCardBackgroundColor(Color.parseColor("#EF5350"))
+        } else {
+            cvBadge.setCardBackgroundColor(Color.parseColor("#4CAF50"))
         }
     }
 
