@@ -106,6 +106,7 @@
                                 android:textStyle="bold" />
 
                         <TextView
+                                android:id="@+id/tvTongCaBenh"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="0"
@@ -140,6 +141,7 @@
                                 android:textStyle="bold" />
 
                         <TextView
+                                android:id="@+id/tvTongBenhNhan"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="0"
@@ -190,6 +192,7 @@
                                 android:textStyle="bold" />
 
                         <TextView
+                                android:id="@+id/tvTiemChung"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="0"
@@ -222,6 +225,7 @@
                                 android:textStyle="bold" />
 
                         <TextView
+                                android:id="@+id/tvXetNghiem"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="0"
@@ -254,6 +258,7 @@
                                 android:textStyle="bold" />
 
                         <TextView
+                                android:id="@+id/tvCachLy"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="0"

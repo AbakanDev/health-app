@@ -57,14 +57,14 @@ class LoginActivity : AppCompatActivity() {
                             val body = response.body()
                             Toast.makeText(this@LoginActivity, body?.message, Toast.LENGTH_SHORT).show()
 
-                            // Lấy thông tin từ backend trả về (Khớp với cục JSON)
+                            // Lấy thông tin từ backend trả về
                             val token = body?.token
                             val hoTen = body?.data?.HoTen ?: "Unknown"
                             val maNguoiDung = body?.data?.MaNguoiDung ?: -1
                             val maVaiTro = body?.data?.MaVaiTro ?: ""
-                            val cccd = body?.data?.CCCD ?: "" // Bổ sung lấy CCCD
+                            val cccd = body?.data?.CCCD ?: ""
 
-// Lưu thông tin phiên đăng nhập vào SharedPreferences
+                            // Lưu thông tin phiên đăng nhập vào SharedPreferences
                             val sharedPreferences = getSharedPreferences("AppPrefs", Context.MODE_PRIVATE)
                             val editor = sharedPreferences.edit()
 
@@ -72,13 +72,21 @@ class LoginActivity : AppCompatActivity() {
                             editor.putInt("MaNguoiDung", maNguoiDung)
                             editor.putString("HoTen", hoTen)
                             editor.putString("MaVaiTro", maVaiTro)
-                            editor.putString("CCCD", cccd) // Bổ sung lưu CCCD
+                            editor.putString("CCCD", cccd)
                             editor.apply()
 
-                            // Chuyển trang và truyền tên qua MainActivity
-                            val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                            intent.putExtra("HoTen", hoTen) // Đồng bộ luôn cả biến truyền qua Activity
-                            startActivity(intent)
+                            // Phân quyền chuyển hướng dựa trên MaVaiTro
+                            if (maVaiTro == "VT03") {
+                                // VT03: Cán bộ y tế -> Chuyển sang MedicalActivity (hoặc tên class tương ứng của bạn)
+                                val intent = Intent(this@LoginActivity, MedicalActivity::class.java)
+                                intent.putExtra("HoTen", hoTen)
+                                startActivity(intent)
+                            } else {
+                                // Mặc định hoặc VT01: Người dân -> Chuyển sang MainActivity
+                                val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                                intent.putExtra("HoTen", hoTen)
+                                startActivity(intent)
+                            }
 
                             // Đóng hoàn toàn LoginActivity
                             finish()
