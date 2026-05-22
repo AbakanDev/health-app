@@ -6,7 +6,6 @@
             android:fillViewport="true"
             android:background="@color/bluemint">
 
-
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -15,6 +14,7 @@
             android:paddingHorizontal="20dp"
             android:paddingTop="24dp"
             android:paddingBottom="80dp">
+
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -23,13 +23,18 @@
                 android:textSize="22sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="12dp" />
+
+        <!-- KHỐI TỔNG QUAN F0, F1, F2 -->
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:baselineAligned="false"
                 android:layout_marginBottom="8dp">
+
+            <!-- Thẻ F0 (Trái) -->
             <androidx.cardview.widget.CardView
+                    android:id="@+id/cvF0Area"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="match_parent"
@@ -50,6 +55,7 @@
                             android:textSize="25sp"
                             android:textStyle="bold" />
                     <TextView
+                            android:id="@+id/tvF0Count"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="5"
@@ -58,12 +64,49 @@
                             android:textStyle="bold" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
+
+            <!-- Cột phải (F1 và F2) -->
             <LinearLayout
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
+
+                <!-- Thẻ F1 -->
                 <androidx.cardview.widget.CardView
+                        android:id="@+id/cvF1Area"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="4dp"
+                        app:cardUseCompatPadding="true">
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:gravity="center">
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="F1"
+                                android:textColor="#B388FF"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+                        <TextView
+                                android:id="@+id/tvF1Count"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="0"
+                                android:textColor="#8C54FF"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Thẻ F2 -->
+                <androidx.cardview.widget.CardView
+                        android:id="@+id/cvF2Area"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
@@ -79,38 +122,11 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="F2"
-                                android:textColor="#B388FF"
-                                android:textSize="20sp"
-                                android:textStyle="bold" />
-                        <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="0"
-                                android:textColor="#8C54FF"
-                                android:textSize="24sp"
-                                android:textStyle="bold" />
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-                <androidx.cardview.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        app:cardCornerRadius="16dp"
-                        app:cardElevation="4dp"
-                        app:cardUseCompatPadding="true">
-                    <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:gravity="center">
-                        <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="F3"
                                 android:textColor="#90CAF9"
                                 android:textSize="20sp"
                                 android:textStyle="bold" />
                         <TextView
+                                android:id="@+id/tvF2Count"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="2"
@@ -121,7 +137,10 @@
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
         </LinearLayout>
+
+        <!-- Thẻ Tổng Lượt Tiếp Xúc -->
         <androidx.cardview.widget.CardView
+                android:id="@+id/cvTotalContact"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="20dp"
@@ -144,6 +163,7 @@
                         android:textSize="25sp"
                         android:textStyle="bold" />
                 <TextView
+                        android:id="@+id/tvTotalContactCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="7"
@@ -152,6 +172,8 @@
                         android:textStyle="bold" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+
+        <!-- Tiêu đề: Lịch Sử Tiếp Xúc -->
         <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -165,6 +187,7 @@
                     android:textSize="25sp"
                     android:textStyle="bold" />
             <TextView
+                    android:id="@+id/tvViewAllContacts"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -173,43 +196,58 @@
                     android:textColor="#64B5F6"
                     android:textSize="20sp" />
         </RelativeLayout>
-        <androidx.cardview.widget.CardView
+
+        <!-- DANH SÁCH LỊCH SỬ TIẾP XÚC -->
+        <LinearLayout
+                android:id="@+id/llContactHistoryContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="3dp"
-                app:cardUseCompatPadding="true">
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
-                <View android:layout_width="6dp" android:layout_height="match_parent" android:background="#B55AE0" />
-                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:padding="12dp">
-                    <androidx.cardview.widget.CardView android:layout_width="50dp" android:layout_height="40dp" app:cardCornerRadius="6dp" app:cardElevation="0dp" app:cardBackgroundColor="#E8B8FA">
-                        <TextView android:layout_width="match_parent" android:layout_height="match_parent" android:text="F2" android:textColor="#B55AE0" android:textStyle="bold" android:textSize="20sp" android:gravity="center" />
-                    </androidx.cardview.widget.CardView>
-                    <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:orientation="vertical" android:gravity="end">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Nhà Hàng Hồ Tây" android:textColor="#64B5F6" android:textStyle="bold" android:textSize="20sp"/>
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="21/3/2026 - 12h00" android:textColor="#90CAF9" android:textSize="20sp" android:layout_marginTop="2dp"/>
+                android:orientation="vertical">
+
+            <!-- Item 1: F2 -->
+            <androidx.cardview.widget.CardView
+                    android:id="@+id/cvContactItem1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="3dp"
+                    app:cardUseCompatPadding="true">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+                    <View android:id="@+id/viewContactStatusColor1" android:layout_width="6dp" android:layout_height="match_parent" android:background="#B55AE0" />
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:padding="12dp">
+                        <androidx.cardview.widget.CardView android:id="@+id/cvContactStatusBadge1" android:layout_width="50dp" android:layout_height="40dp" app:cardCornerRadius="6dp" app:cardElevation="0dp" app:cardBackgroundColor="#E8B8FA">
+                            <TextView android:id="@+id/tvContactStatusText1" android:layout_width="match_parent" android:layout_height="match_parent" android:text="F2" android:textColor="#B55AE0" android:textStyle="bold" android:textSize="20sp" android:gravity="center" />
+                        </androidx.cardview.widget.CardView>
+                        <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:orientation="vertical" android:gravity="end">
+                            <TextView android:id="@+id/tvContactLocation1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Nhà Hàng Hồ Tây" android:textColor="#64B5F6" android:textStyle="bold" android:textSize="20sp"/>
+                            <TextView android:id="@+id/tvContactTime1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="21/3/2026 - 12h00" android:textColor="#90CAF9" android:textSize="20sp" android:layout_marginTop="2dp"/>
+                        </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="3dp"
-                app:cardUseCompatPadding="true">
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
-                <View android:layout_width="6dp" android:layout_height="match_parent" android:background="#D32F2F" />
-                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:padding="12dp">
-                    <androidx.cardview.widget.CardView android:layout_width="50dp" android:layout_height="40dp" app:cardCornerRadius="6dp" app:cardElevation="0dp" app:cardBackgroundColor="#EF9A9A">
-                        <TextView android:layout_width="match_parent" android:layout_height="match_parent" android:text="F0" android:textColor="#B71C1C" android:textStyle="bold" android:textSize="20sp" android:gravity="center" />
-                    </androidx.cardview.widget.CardView>
-                    <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:orientation="vertical" android:gravity="end">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Nhà Hàng Hồ Tây" android:textColor="#64B5F6" android:textStyle="bold" android:textSize="20sp"/>
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="21/3/2026 - 12h00" android:textColor="#90CAF9" android:textSize="20sp" android:layout_marginTop="2dp"/>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Item 2: F0 -->
+            <androidx.cardview.widget.CardView
+                    android:id="@+id/cvContactItem2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="3dp"
+                    app:cardUseCompatPadding="true">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+                    <View android:id="@+id/viewContactStatusColor2" android:layout_width="6dp" android:layout_height="match_parent" android:background="#D32F2F" />
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:padding="12dp">
+                        <androidx.cardview.widget.CardView android:id="@+id/cvContactStatusBadge2" android:layout_width="50dp" android:layout_height="40dp" app:cardCornerRadius="6dp" app:cardElevation="0dp" app:cardBackgroundColor="#EF9A9A">
+                            <TextView android:id="@+id/tvContactStatusText2" android:layout_width="match_parent" android:layout_height="match_parent" android:text="F0" android:textColor="#B71C1C" android:textStyle="bold" android:textSize="20sp" android:gravity="center" />
+                        </androidx.cardview.widget.CardView>
+                        <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:orientation="vertical" android:gravity="end">
+                            <TextView android:id="@+id/tvContactLocation2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Nhà Hàng Hồ Tây" android:textColor="#64B5F6" android:textStyle="bold" android:textSize="20sp"/>
+                            <TextView android:id="@+id/tvContactTime2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="21/3/2026 - 12h00" android:textColor="#90CAF9" android:textSize="20sp" android:layout_marginTop="2dp"/>
+                        </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>
