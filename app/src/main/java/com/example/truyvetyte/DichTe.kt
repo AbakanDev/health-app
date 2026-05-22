@@ -326,12 +326,17 @@ class DichTe : Fragment() {
     }
 
     private fun updateXetNghiemUI(danhSach: List<XetNghiem>) {
+        val sharedPreferences = requireActivity().getSharedPreferences("AppPrefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
         if (danhSach.isEmpty()) {
             cvKetQuaMoiNhat.visibility = View.GONE
             layoutXetNghiem1.visibility = View.GONE
             layoutXetNghiem2.visibility = View.GONE
             dividerXetNghiem.visibility = View.GONE
             tvChuaXetNghiem.visibility = View.VISIBLE
+
+            editor.putBoolean("IS_POSITIVE", false)
+            editor.apply()
             return
         }
 
@@ -344,6 +349,9 @@ class DichTe : Fragment() {
         tvNgayXetNghiemMoiNhat.text = latestTest.NgayXetNghiem
 
         val isPositive = latestTest.KetQua.contains("Dương", ignoreCase = true)
+
+        editor.putBoolean("IS_POSITIVE", isPositive)
+        editor.apply()
         if (isPositive) {
             tvTrangThaiXetNghiem.text = "DƯƠNG TÍNH"
             tvTrangThaiXetNghiem.setTextColor(Color.parseColor("#EF5350")) // Đỏ
