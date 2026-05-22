@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/scrollViewMain"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fillViewport="true"
             android:background="@color/bluemint">
 
-
     <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="@drawable/img_bg_white"
             android:orientation="vertical"
             android:paddingHorizontal="20dp"
             android:paddingTop="24dp"
-            android:paddingBottom="80dp">
+            android:paddingBottom="40dp">
+
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -23,12 +24,14 @@
                 android:textSize="22sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="12dp" />
+
         <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="180dp"
                 android:orientation="horizontal"
                 android:baselineAligned="false"
                 android:layout_marginBottom="8dp">
+
             <androidx.cardview.widget.CardView
                     android:layout_width="0dp"
                     android:layout_weight="1"
@@ -50,6 +53,7 @@
                             android:textSize="25sp"
                             android:textStyle="bold" />
                     <TextView
+                            android:id="@+id/tvF0Count"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="5"
@@ -58,6 +62,7 @@
                             android:textStyle="bold" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
+
             <LinearLayout
                     android:layout_width="0dp"
                     android:layout_weight="1"
@@ -83,6 +88,7 @@
                                 android:textSize="20sp"
                                 android:textStyle="bold" />
                         <TextView
+                                android:id="@+id/tvF2Count"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="0"
@@ -91,6 +97,7 @@
                                 android:textStyle="bold" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
+
                 <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
@@ -111,6 +118,7 @@
                                 android:textSize="20sp"
                                 android:textStyle="bold" />
                         <TextView
+                                android:id="@+id/tvF3Count"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="2"
@@ -121,6 +129,7 @@
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
         </LinearLayout>
+
         <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -144,6 +153,7 @@
                         android:textSize="25sp"
                         android:textStyle="bold" />
                 <TextView
+                        android:id="@+id/tvTotalContactCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="7"
@@ -152,6 +162,7 @@
                         android:textStyle="bold" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+
         <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -165,6 +176,7 @@
                     android:textSize="25sp"
                     android:textStyle="bold" />
             <TextView
+                    android:id="@+id/tvBtnViewAllContacts"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -173,7 +185,9 @@
                     android:textColor="#64B5F6"
                     android:textSize="20sp" />
         </RelativeLayout>
+
         <androidx.cardview.widget.CardView
+                android:id="@+id/cvContactItem1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="8dp"
@@ -183,16 +197,18 @@
                 <View android:layout_width="6dp" android:layout_height="match_parent" android:background="#B55AE0" />
                 <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:padding="12dp">
                     <androidx.cardview.widget.CardView android:layout_width="50dp" android:layout_height="40dp" app:cardCornerRadius="6dp" app:cardElevation="0dp" app:cardBackgroundColor="#E8B8FA">
-                        <TextView android:layout_width="match_parent" android:layout_height="match_parent" android:text="F2" android:textColor="#B55AE0" android:textStyle="bold" android:textSize="20sp" android:gravity="center" />
+                        <TextView android:id="@+id/tvContactLevel1" android:layout_width="match_parent" android:layout_height="match_parent" android:text="F2" android:textColor="#B55AE0" android:textStyle="bold" android:textSize="20sp" android:gravity="center" />
                     </androidx.cardview.widget.CardView>
                     <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:orientation="vertical" android:gravity="end">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Nhà Hàng Hồ Tây" android:textColor="#64B5F6" android:textStyle="bold" android:textSize="20sp"/>
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="21/3/2026 - 12h00" android:textColor="#90CAF9" android:textSize="20sp" android:layout_marginTop="2dp"/>
+                        <TextView android:id="@+id/tvContactLocation1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Nhà Hàng Hồ Tây" android:textColor="#64B5F6" android:textStyle="bold" android:textSize="20sp"/>
+                        <TextView android:id="@+id/tvContactTime1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="21/3/2026 - 12h00" android:textColor="#90CAF9" android:textSize="20sp" android:layout_marginTop="2dp"/>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+
         <androidx.cardview.widget.CardView
+                android:id="@+id/cvContactItem2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="8dp"
@@ -202,14 +218,279 @@
                 <View android:layout_width="6dp" android:layout_height="match_parent" android:background="#D32F2F" />
                 <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:padding="12dp">
                     <androidx.cardview.widget.CardView android:layout_width="50dp" android:layout_height="40dp" app:cardCornerRadius="6dp" app:cardElevation="0dp" app:cardBackgroundColor="#EF9A9A">
-                        <TextView android:layout_width="match_parent" android:layout_height="match_parent" android:text="F0" android:textColor="#B71C1C" android:textStyle="bold" android:textSize="20sp" android:gravity="center" />
+                        <TextView android:id="@+id/tvContactLevel2" android:layout_width="match_parent" android:layout_height="match_parent" android:text="F0" android:textColor="#B71C1C" android:textStyle="bold" android:textSize="20sp" android:gravity="center" />
                     </androidx.cardview.widget.CardView>
                     <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:orientation="vertical" android:gravity="end">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Nhà Hàng Hồ Tây" android:textColor="#64B5F6" android:textStyle="bold" android:textSize="20sp"/>
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="21/3/2026 - 12h00" android:textColor="#90CAF9" android:textSize="20sp" android:layout_marginTop="2dp"/>
+                        <TextView android:id="@+id/tvContactLocation2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Nhà Hàng Hồ Tây" android:textColor="#64B5F6" android:textStyle="bold" android:textSize="20sp"/>
+                        <TextView android:id="@+id/tvContactTime2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="21/3/2026 - 12h00" android:textColor="#90CAF9" android:textSize="20sp" android:layout_marginTop="2dp"/>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#E0E0E0"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="32dp"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tổng Quan Khu Vực"
+                android:textColor="#5BB8C4"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="25dp" />
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:orientation="horizontal"
+                android:baselineAligned="false"
+                android:layout_marginBottom="8dp">
+
+            <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="4dp"
+                    app:cardUseCompatPadding="true">
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="16dp">
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Khu Vực Nguy Hiểm"
+                            android:textColor="#D797F0"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:layout_marginBottom="8dp"/>
+                    <TextView
+                            android:id="@+id/tvDangerAreaCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="5"
+                            android:textColor="#B355DB"
+                            android:textSize="60sp"
+                            android:textStyle="bold" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="4dp"
+                        app:cardUseCompatPadding="true">
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:gravity="center">
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Khu Vực Nguy Cơ"
+                                android:textColor="#B388FF"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+                        <TextView
+                                android:id="@+id/tvRiskAreaCount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="3"
+                                android:textColor="#8C54FF"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="4dp"
+                        app:cardUseCompatPadding="true">
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:gravity="center">
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Khu Vực An Toàn"
+                                android:textColor="#90CAF9"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+                        <TextView
+                                android:id="@+id/tvSafeAreaCount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="2"
+                                android:textColor="#42A5F5"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+        </LinearLayout>
+
+        <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="4dp"
+                app:cardUseCompatPadding="true"
+                android:layout_marginBottom="24dp">
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="24dp"
+                    android:paddingVertical="16dp">
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Tổng Lượt Check-In"
+                        android:textColor="#82B1FF"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+                <TextView
+                        android:id="@+id/tvTotalCheckInCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="10"
+                        android:textColor="#5C94F0"
+                        android:textSize="28sp"
+                        android:textStyle="bold" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:text="Lịch Sử Check - In"
+                    android:textColor="#5BB8C4"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            <TextView
+                    android:id="@+id/tvBtnViewAllCheckIns"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:text="Xem tất cả"
+                    android:textColor="#64B5F6"
+                    android:textSize="18sp" />
+        </RelativeLayout>
+
+        <androidx.cardview.widget.CardView
+                android:id="@+id/cvCheckInItem1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="3dp"
+                app:cardUseCompatPadding="true">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+                <View android:layout_width="6dp" android:layout_height="match_parent" android:background="#81C784" />
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:padding="12dp">
+                    <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:orientation="vertical">
+                        <TextView android:id="@+id/tvCheckInLocation1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Nhà Hàng Hồ Tây" android:textColor="#64B5F6" android:textStyle="bold" android:textSize="20sp"/>
+                        <TextView android:id="@+id/tvCheckInTime1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="21/3/2026 - 12h00" android:textColor="#90CAF9" android:textSize="18sp" android:layout_marginTop="2dp"/>
+                    </LinearLayout>
+                    <androidx.cardview.widget.CardView android:layout_width="50dp" android:layout_height="40dp" app:cardCornerRadius="6dp" app:cardElevation="0dp" app:cardBackgroundColor="#A5D6A7">
+                        <TextView android:id="@+id/tvCheckInStatus1" android:layout_width="match_parent" android:layout_height="match_parent" android:text="An\nToàn" android:textColor="#2E7D32" android:textStyle="bold" android:textSize="15sp" android:gravity="center" />
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+                android:id="@+id/cvCheckInItem2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="3dp"
+                app:cardUseCompatPadding="true">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+                <View android:layout_width="6dp" android:layout_height="match_parent" android:background="#E53935" />
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:padding="12dp">
+                    <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:orientation="vertical">
+                        <TextView android:id="@+id/tvCheckInLocation2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Siêu Thị WinMart" android:textColor="#64B5F6" android:textStyle="bold" android:textSize="20sp"/>
+                        <TextView android:id="@+id/tvCheckInTime2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="21/3/2026 - 5h30" android:textColor="#90CAF9" android:textSize="18sp" android:layout_marginTop="2dp"/>
+                    </LinearLayout>
+                    <androidx.cardview.widget.CardView android:layout_width="50dp" android:layout_height="40dp" app:cardCornerRadius="6dp" app:cardElevation="0dp" app:cardBackgroundColor="#EF9A9A">
+                        <TextView android:id="@+id/tvCheckInStatus2" android:layout_width="match_parent" android:layout_height="match_parent" android:text="Nguy\nHiểm" android:textColor="#C62828" android:textStyle="bold" android:textSize="15sp" android:gravity="center" />
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+                android:id="@+id/cvCheckInItem3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="3dp"
+                app:cardUseCompatPadding="true">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+                <View android:layout_width="6dp" android:layout_height="match_parent" android:background="#FFF176" />
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:padding="12dp">
+                    <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:orientation="vertical">
+                        <TextView android:id="@+id/tvCheckInLocation3" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Khu Vui Chơi Đầm Sen" android:textColor="#64B5F6" android:textStyle="bold" android:textSize="20sp"/>
+                        <TextView android:id="@+id/tvCheckInTime3" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="21/3/2026 - 8h" android:textColor="#90CAF9" android:textSize="18sp" android:layout_marginTop="2dp"/>
+                    </LinearLayout>
+                    <androidx.cardview.widget.CardView android:layout_width="50dp" android:layout_height="40dp" app:cardCornerRadius="6dp" app:cardElevation="0dp" app:cardBackgroundColor="#FFF59D">
+                        <TextView android:id="@+id/tvCheckInStatus3" android:layout_width="match_parent" android:layout_height="match_parent" android:text="Nguy\nCơ" android:textColor="#F57F17" android:textStyle="bold" android:textSize="15sp" android:gravity="center" />
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+                android:id="@+id/cvCheckInItem4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="3dp"
+                app:cardUseCompatPadding="true">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+                <View android:layout_width="6dp" android:layout_height="match_parent" android:background="#FFF176" />
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:padding="12dp">
+                    <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:orientation="vertical">
+                        <TextView android:id="@+id/tvCheckInLocation4" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Công Viên Hoàng Văn Thụ" android:textColor="#64B5F6" android:textStyle="bold" android:textSize="20sp"/>
+                        <TextView android:id="@+id/tvCheckInTime4" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="21/3/2026 - 4h" android:textColor="#90CAF9" android:textSize="18sp" android:layout_marginTop="2dp"/>
+                    </LinearLayout>
+                    <androidx.cardview.widget.CardView android:layout_width="50dp" android:layout_height="40dp" app:cardCornerRadius="6dp" app:cardElevation="0dp" app:cardBackgroundColor="#FFF59D">
+                        <TextView android:id="@+id/tvCheckInStatus4" android:layout_width="match_parent" android:layout_height="match_parent" android:text="Nguy\nCơ" android:textColor="#F57F17" android:textStyle="bold" android:textSize="15sp" android:gravity="center" />
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
     </LinearLayout>
 </ScrollView>
