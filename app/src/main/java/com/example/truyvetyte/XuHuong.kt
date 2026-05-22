@@ -18,12 +18,15 @@ import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import kotlinx.coroutines.launch
+import android.content.Context
 
 class XuHuong : Fragment() {
 
     private lateinit var barChart: BarChart
     private lateinit var tvDose1: TextView
     private lateinit var tvDose2: TextView
+    private lateinit var tvStatusMain: TextView
+    private lateinit var tvStatusDesc: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,6 +40,10 @@ class XuHuong : Fragment() {
         tvDose1 = view.findViewById(R.id.tv_vaccine_dose_1)
         tvDose2 = view.findViewById(R.id.tv_vaccine_dose_2)
 
+        // Ánh xạ View trạng thái
+        tvStatusMain = view.findViewById(R.id.tv_status_main)
+        tvStatusDesc = view.findViewById(R.id.tv_status_desc)
+
         return view
     }
 
@@ -44,7 +51,33 @@ class XuHuong : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         fetchTrendData()
-        fetchVaccineRates() // Gọi thêm hàm lấy tỷ lệ tiêm chủng
+        fetchVaccineRates()
+    }
+    override fun onResume() {
+        super.onResume()
+        updateHealthStatus()
+    }
+
+    private fun updateHealthStatus() {
+        val sharedPreferences = requireActivity().getSharedPreferences("AppPrefs", Context.MODE_PRIVATE)
+        // Lấy cờ IS_POSITIVE ra, nếu không có thì mặc định là false (An toàn)
+        val isPositive = sharedPreferences.getBoolean("IS_POSITIVE", false)
+
+        if (isPositive) {
+            // Đổi giao diện báo động đỏ
+            tvStatusMain.text = "Nguy Hiểm"
+            tvStatusMain.setTextColor(Color.parseColor("#EF5350")) // Màu đỏ cảnh báo
+
+            tvStatusDesc.text = "Cảnh báo: Phát hiện yếu tố dịch tễ Dương Tính. Vui lòng cách ly ngay lập tức và liên hệ với cơ sở y tế gần nhất hoặc gọi đường dây nóng của Bộ Y tế!"
+            tvStatusDesc.setTextColor(Color.parseColor("#EF5350"))
+        } else {
+            // Trả về giao diện an toàn ban đầu
+            tvStatusMain.text = "An Toàn"
+            tvStatusMain.setTextColor(Color.parseColor("#42A5F5")) // Màu xanh
+
+            tvStatusDesc.text = "Trạng thái dịch tễ của bạn hiện tại không có nguy cơ lây nhiễm cao. Tiếp tục tuân thủ quy tắc 5K."
+            tvStatusDesc.setTextColor(Color.parseColor("#5C94F0"))
+        }
     }
 
     private fun fetchVaccineRates() {
