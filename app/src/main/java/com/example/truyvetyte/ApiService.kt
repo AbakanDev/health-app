@@ -3,7 +3,6 @@ package com.example.truyvetyte.network
 import com.example.truyvetyte.CheckInRequest
 import com.example.truyvetyte.LoginRequest
 import com.example.truyvetyte.LoginResponse
-import com.example.truyvetyte.model.CachLy
 import com.example.truyvetyte.model.CachLyResponse
 import com.example.truyvetyte.model.DashboardSummaryResponse
 import com.example.truyvetyte.model.HealthResponse
