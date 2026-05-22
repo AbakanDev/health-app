@@ -4,6 +4,7 @@ import com.example.truyvetyte.CheckInRequest
 import com.example.truyvetyte.LoginRequest
 import com.example.truyvetyte.LoginResponse
 import com.example.truyvetyte.model.CachLyResponse
+import com.example.truyvetyte.model.ContactStatsResponse
 import com.example.truyvetyte.model.DashboardSummaryResponse
 import com.example.truyvetyte.model.HealthResponse
 import com.example.truyvetyte.model.RegisterModels
@@ -60,4 +61,10 @@ interface ApiService {
 
     @GET("api/health/dashboard-summary")
     suspend fun getDashboardSummary(): Response<DashboardSummaryResponse>
+
+    @GET("api/health/contact-stats/{cccd}")
+    suspend fun getContactStats(
+        @Header("Authorization") token: String,
+        @Path("cccd") cccd: String
+    ): Response<ContactStatsResponse>
 }
