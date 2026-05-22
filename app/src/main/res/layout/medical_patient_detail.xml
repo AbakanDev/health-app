@@ -75,7 +75,6 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="8dp"
-                        android:layout_toEndOf="@id/ivBack"
                         android:text="THÔNG TIN BỆNH NHÂN"
                         android:textColor="#BA68C8"
                         android:textSize="20sp"
