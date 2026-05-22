@@ -5,6 +5,7 @@ import com.example.truyvetyte.LoginRequest
 import com.example.truyvetyte.LoginResponse
 import com.example.truyvetyte.model.CachLy
 import com.example.truyvetyte.model.CachLyResponse
+import com.example.truyvetyte.model.DashboardSummaryResponse
 import com.example.truyvetyte.model.HealthResponse
 import com.example.truyvetyte.model.RegisterModels
 import com.example.truyvetyte.model.RegisterRequest
@@ -57,4 +58,7 @@ interface ApiService {
 
     @GET("api/health/vaccine-rates")
     suspend fun getVaccineRates(): Response<VaccineRatesResponse>
+
+    @GET("api/health/dashboard-summary")
+    suspend fun getDashboardSummary(): Response<DashboardSummaryResponse>
 }

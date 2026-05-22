@@ -19,7 +19,8 @@ import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import kotlinx.coroutines.launch
 import android.content.Context
-
+import java.text.NumberFormat
+import java.util.Locale
 class XuHuong : Fragment() {
 
     private lateinit var barChart: BarChart
@@ -27,6 +28,10 @@ class XuHuong : Fragment() {
     private lateinit var tvDose2: TextView
     private lateinit var tvStatusMain: TextView
     private lateinit var tvStatusDesc: TextView
+    private lateinit var tvStatF0: TextView
+    private lateinit var tvStatF1F2: TextView
+    private lateinit var tvStatQuarantine: TextView
+    private lateinit var tvStatRedZone: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,6 +48,10 @@ class XuHuong : Fragment() {
         // Ánh xạ View trạng thái
         tvStatusMain = view.findViewById(R.id.tv_status_main)
         tvStatusDesc = view.findViewById(R.id.tv_status_desc)
+        tvStatF0 = view.findViewById(R.id.tv_stat_f0)
+        tvStatF1F2 = view.findViewById(R.id.tv_stat_f1_f2)
+        tvStatQuarantine = view.findViewById(R.id.tv_stat_quarantine)
+        tvStatRedZone = view.findViewById(R.id.tv_stat_red_zone)
 
         return view
     }
@@ -52,10 +61,37 @@ class XuHuong : Fragment() {
 
         fetchTrendData()
         fetchVaccineRates()
+        fetchDashboardSummary()
     }
     override fun onResume() {
         super.onResume()
         updateHealthStatus()
+    }
+    private fun fetchDashboardSummary() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            try {
+                val response = RetrofitClient.instance.getDashboardSummary()
+                if (response.isSuccessful && response.body() != null) {
+                    val summaryResponse = response.body()!!
+
+                    if (summaryResponse.success && summaryResponse.data != null) {
+                        // Format số liệu thành dạng có dấu chấm (VD: 17.000)
+                        val formatter = NumberFormat.getNumberInstance(Locale("vi", "VN"))
+
+                        tvStatF0.text = formatter.format(summaryResponse.data.SoCaF0)
+                        tvStatF1F2.text = formatter.format(summaryResponse.data.SoCaF1F2)
+                        tvStatQuarantine.text = formatter.format(summaryResponse.data.SoNguoiCachLy)
+                        tvStatRedZone.text = formatter.format(summaryResponse.data.SoVungNguyHiem)
+                    } else {
+                        Log.e("XuHuongFragment", summaryResponse.message)
+                    }
+                } else {
+                    Log.e("XuHuongFragment", "Lỗi lấy dữ liệu tổng quan từ server")
+                }
+            } catch (e: Exception) {
+                Log.e("XuHuongFragment", "Lỗi kết nối dashboard summary: ${e.message}")
+            }
+        }
     }
 
     private fun updateHealthStatus() {
