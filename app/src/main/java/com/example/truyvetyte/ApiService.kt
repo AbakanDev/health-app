@@ -4,6 +4,8 @@ import com.example.truyvetyte.CheckInRequest
 import com.example.truyvetyte.LoginRequest
 import com.example.truyvetyte.LoginResponse
 import com.example.truyvetyte.model.CachLyResponse
+import com.example.truyvetyte.model.CheckinHistoryResponse
+import com.example.truyvetyte.model.CheckinStatsResponse
 import com.example.truyvetyte.model.ContactHistoryResponse
 import com.example.truyvetyte.model.ContactStatsResponse
 import com.example.truyvetyte.model.DashboardSummaryResponse
@@ -74,4 +76,16 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("cccd") cccd: String
     ): Response<ContactHistoryResponse>
+
+    @GET("api/health/checkin-stats/{cccd}")
+    suspend fun getCheckinStats(
+        @Header("Authorization") token: String,
+        @Path("cccd") cccd: String
+    ): Response<CheckinStatsResponse>
+
+    @GET("api/health/checkin-history/{cccd}")
+    suspend fun getCheckinHistory(
+        @Header("Authorization") token: String,
+        @Path("cccd") cccd: String
+    ): Response<CheckinHistoryResponse>
 }
