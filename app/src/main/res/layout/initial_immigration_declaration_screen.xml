@@ -31,6 +31,7 @@
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
+        <!-- Lịch sử xuất nhập cảnh -->
         <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -49,7 +50,6 @@
                         android:layout_height="wrap_content"
                         android:background="#55CBF9"
                         android:padding="16dp">
-
                     <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -57,17 +57,6 @@
                             android:textColor="#FFFFFF"
                             android:textSize="16sp"
                             android:textStyle="bold" />
-
-                    <TextView
-                            android:id="@+id/tvXemTatCaXNC"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Xem tất cả"
-                            android:textColor="#FFFFFF"
-                            android:textSize="14sp"
-                            android:textStyle="bold"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="true"/>
                 </RelativeLayout>
 
                 <TextView
@@ -82,101 +71,22 @@
                         android:padding="16dp"
                         android:visibility="gone" />
 
-                <RelativeLayout
-                        android:id="@+id/layoutLan2"
+                <ScrollView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="16dp">
-
+                        android:maxHeight="240dp"
+                        android:fillViewport="false">
                     <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:id="@+id/layoutXNCContainer"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentStart="true"
-                            android:layout_centerVertical="true"
-                            android:orientation="vertical">
+                            android:orientation="vertical" />
+                </ScrollView>
 
-                        <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Lần 2"
-                                android:textColor="#79A9F5"
-                                android:textStyle="bold"
-                                android:textSize="22sp"/>
-
-                        <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Khai báo nhập cảnh"
-                                android:textColor="#A3C7F6"
-                                android:textSize="14sp"
-                                android:textStyle="bold"
-                                android:layout_marginTop="4dp"/>
-                    </LinearLayout>
-
-                    <TextView
-                            android:id="@+id/tvNgayXNCLan2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="1/2/2026 - 12h00"
-                            android:textColor="#92BEFA"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="true"/>
-                </RelativeLayout>
-
-                <View
-                        android:id="@+id/dividerXNC"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="#E0E0E0"
-                        android:layout_marginHorizontal="16dp"/>
-
-                <RelativeLayout
-                        android:id="@+id/layoutLan1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="16dp">
-
-                    <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentStart="true"
-                            android:layout_centerVertical="true"
-                            android:orientation="vertical">
-
-                        <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Lần 1"
-                                android:textColor="#79A9F5"
-                                android:textStyle="bold"
-                                android:textSize="22sp"/>
-
-                        <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Khai báo xuất cảnh"
-                                android:textColor="#A3C7F6"
-                                android:textSize="14sp"
-                                android:textStyle="bold"
-                                android:layout_marginTop="4dp"/>
-                    </LinearLayout>
-
-                    <TextView
-                            android:id="@+id/tvNgayXNCLan1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="1/1/2026 - 12h00"
-                            android:textColor="#92BEFA"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="true"/>
-                </RelativeLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
+        <!-- Loại Cửa Khẩu -->
         <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -211,16 +121,39 @@
                 </LinearLayout>
 
                 <RadioGroup
+                        android:id="@+id/rgLoaiCuaKhau"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp">
-                    <RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Hàng Không" android:textColor="@color/bluelightgreen" android:buttonTint="@color/bluelightgreen" android:textStyle="bold"/>
-                    <RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Đất Liền" android:textColor="@color/bluelightgreen" android:buttonTint="@color/bluelightgreen" android:textStyle="bold"/>
-                    <RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Đường Biển" android:textColor="@color/bluelightgreen" android:buttonTint="@color/bluelightgreen" android:textStyle="bold"/>
+                    <RadioButton
+                            android:id="@+id/rbHangKhong"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Hàng Không"
+                            android:textColor="@color/bluelightgreen"
+                            android:buttonTint="@color/bluelightgreen"
+                            android:textStyle="bold"/>
+                    <RadioButton
+                            android:id="@+id/rbDatLien"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Đất Liền"
+                            android:textColor="@color/bluelightgreen"
+                            android:buttonTint="@color/bluelightgreen"
+                            android:textStyle="bold"/>
+                    <RadioButton
+                            android:id="@+id/rbDuongBien"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Đường Biển"
+                            android:textColor="@color/bluelightgreen"
+                            android:buttonTint="@color/bluelightgreen"
+                            android:textStyle="bold"/>
                 </RadioGroup>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
+        <!-- Loại Xuất Nhập Cảnh -->
         <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -255,15 +188,31 @@
                 </LinearLayout>
 
                 <RadioGroup
+                        android:id="@+id/rgLoaiXNC"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp">
-                    <RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Xuất Cảnh" android:textColor="@color/bluelightgreen" android:buttonTint="@color/bluelightgreen" android:textStyle="bold"/>
-                    <RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Nhập Cảnh" android:textColor="@color/bluelightgreen" android:buttonTint="@color/bluelightgreen" android:textStyle="bold"/>
+                    <RadioButton
+                            android:id="@+id/rbXuatCanh"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Xuất Cảnh"
+                            android:textColor="@color/bluelightgreen"
+                            android:buttonTint="@color/bluelightgreen"
+                            android:textStyle="bold"/>
+                    <RadioButton
+                            android:id="@+id/rbNhapCanh"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Nhập Cảnh"
+                            android:textColor="@color/bluelightgreen"
+                            android:buttonTint="@color/bluelightgreen"
+                            android:textStyle="bold"/>
                 </RadioGroup>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
+        <!-- Quốc Gia -->
         <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -298,6 +247,7 @@
                 </LinearLayout>
 
                 <EditText
+                        android:id="@+id/etQuocGiaDi"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Việt Nam"
@@ -329,6 +279,7 @@
                 </LinearLayout>
 
                 <EditText
+                        android:id="@+id/etQuocGiaDen"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Việt Nam"
@@ -340,6 +291,7 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
+        <!-- Thông Tin Cửa Khẩu -->
         <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -383,6 +335,7 @@
                 </LinearLayout>
 
                 <EditText
+                        android:id="@+id/etTenCuaKhau"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Việt Nam"
@@ -402,15 +355,31 @@
                         android:textStyle="bold" />
 
                 <RadioGroup
+                        android:id="@+id/rgTrangThaiCuaKhau"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp">
-                    <RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Hoạt Động" android:textColor="@color/bluelightgreen" android:buttonTint="@color/bluelightgreen" android:textStyle="bold"/>
-                    <RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Ngừng Hoạt Động" android:textColor="@color/bluelightgreen" android:buttonTint="@color/bluelightgreen" android:textStyle="bold"/>
+                    <RadioButton
+                            android:id="@+id/rbHoatDong"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Hoạt Động"
+                            android:textColor="@color/bluelightgreen"
+                            android:buttonTint="@color/bluelightgreen"
+                            android:textStyle="bold"/>
+                    <RadioButton
+                            android:id="@+id/rbNgungHoatDong"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Ngừng Hoạt Động"
+                            android:textColor="@color/bluelightgreen"
+                            android:buttonTint="@color/bluelightgreen"
+                            android:textStyle="bold"/>
                 </RadioGroup>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
+        <!-- Cam kết -->
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -420,6 +389,7 @@
                 android:layout_marginStart="4dp">
 
             <CheckBox
+                    android:id="@+id/cbKhongCo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:buttonTint="@color/bluelightgreen" />
@@ -451,6 +421,7 @@
                 android:layout_marginStart="4dp">
 
             <CheckBox
+                    android:id="@+id/cbCamKet"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:buttonTint="@color/bluelightgreen" />
@@ -474,7 +445,7 @@
         </LinearLayout>
 
         <Button
-                android:id="@+id/btnHoanTat2"
+                android:id="@+id/btnHoanTat"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_marginTop="24dp"
