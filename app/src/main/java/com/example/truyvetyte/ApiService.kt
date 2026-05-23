@@ -102,4 +102,10 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Body request: KhaiBaoRequest
     ): Response<KhaiBaoSubmitResponse>
+
+    @GET("api/health/immigration-history/{cccd}")
+    suspend fun getImmigrationHistory(
+        @Header("Authorization") token: String,
+        @Path("cccd") cccd: String
+    ): Response<com.example.truyvetyte.model.ImmigrationHistoryResponse>
 }

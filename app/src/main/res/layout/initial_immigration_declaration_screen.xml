@@ -45,11 +45,13 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
+                <!-- Header -->
                 <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="#55CBF9"
                         android:padding="16dp">
+
                     <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -59,8 +61,9 @@
                             android:textStyle="bold" />
                 </RelativeLayout>
 
+                <!-- Text khi chưa có dữ liệu -->
                 <TextView
-                        android:id="@+id/tvChuaXNC"
+                        android:id="@+id/tvChuaXuatNhapCanh"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Bạn chưa có lịch sử xuất nhập cảnh"
@@ -71,22 +74,24 @@
                         android:padding="16dp"
                         android:visibility="gone" />
 
+                <!-- Scroll danh sách -->
                 <ScrollView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:maxHeight="240dp"
                         android:fillViewport="false">
+
                     <LinearLayout
-                            android:id="@+id/layoutXNCContainer"
+                            android:id="@+id/layoutXuatNhapCanhContainer"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical" />
                 </ScrollView>
 
             </LinearLayout>
+
         </androidx.cardview.widget.CardView>
 
-        <!-- Loại Cửa Khẩu -->
         <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -153,145 +158,6 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Loại Xuất Nhập Cảnh -->
-        <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp"
-                app:cardUseCompatPadding="true">
-
-            <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Loại Xuất Nhập Cảnh "
-                            android:textColor="@color/bluewithcheckbox"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="*"
-                            android:textColor="#FF0000"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-                </LinearLayout>
-
-                <RadioGroup
-                        android:id="@+id/rgLoaiXNC"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp">
-                    <RadioButton
-                            android:id="@+id/rbXuatCanh"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Xuất Cảnh"
-                            android:textColor="@color/bluelightgreen"
-                            android:buttonTint="@color/bluelightgreen"
-                            android:textStyle="bold"/>
-                    <RadioButton
-                            android:id="@+id/rbNhapCanh"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Nhập Cảnh"
-                            android:textColor="@color/bluelightgreen"
-                            android:buttonTint="@color/bluelightgreen"
-                            android:textStyle="bold"/>
-                </RadioGroup>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <!-- Quốc Gia -->
-        <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp"
-                app:cardUseCompatPadding="true">
-
-            <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Quốc Gia Đi "
-                            android:textColor="@color/bluewithcheckbox"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="*"
-                            android:textColor="#FF0000"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-                </LinearLayout>
-
-                <EditText
-                        android:id="@+id/etQuocGiaDi"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Việt Nam"
-                        android:textColorHint="#A0A0A0"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:paddingBottom="12dp"
-                        android:backgroundTint="#D3D3D3"
-                        android:layout_marginBottom="16dp"/>
-
-                <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Quốc Gia Đến "
-                            android:textColor="@color/bluewithcheckbox"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="*"
-                            android:textColor="#FF0000"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-                </LinearLayout>
-
-                <EditText
-                        android:id="@+id/etQuocGiaDen"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Việt Nam"
-                        android:textColorHint="#A0A0A0"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:paddingBottom="12dp"
-                        android:backgroundTint="#D3D3D3"/>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <!-- Thông Tin Cửa Khẩu -->
         <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -321,7 +187,7 @@
                     <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Tên Cửa Khẩu "
+                            android:text="Chọn Cửa Khẩu "
                             android:textColor="@color/bluelightgreen"
                             android:textSize="14sp"
                             android:textStyle="bold" />
@@ -334,17 +200,14 @@
                             android:textStyle="bold" />
                 </LinearLayout>
 
-                <EditText
-                        android:id="@+id/etTenCuaKhau"
+                <Spinner
+                        android:id="@+id/spnChonCuaKhau"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Việt Nam"
-                        android:textColorHint="#A0A0A0"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:paddingBottom="12dp"
+                        android:layout_height="48dp"
+                        android:layout_marginBottom="16dp"
+                        android:layout_marginTop="4dp"
                         android:backgroundTint="#D3D3D3"
-                        android:layout_marginBottom="16dp"/>
+                        android:spinnerMode="dropdown"/>
 
                 <TextView
                         android:layout_width="wrap_content"
@@ -379,7 +242,6 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Cam kết -->
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -389,7 +251,7 @@
                 android:layout_marginStart="4dp">
 
             <CheckBox
-                    android:id="@+id/cbKhongCo"
+                    android:id="@+id/cbKhongCoCuaKhau"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:buttonTint="@color/bluelightgreen" />
@@ -421,7 +283,7 @@
                 android:layout_marginStart="4dp">
 
             <CheckBox
-                    android:id="@+id/cbCamKet"
+                    android:id="@+id/cbCamKetXNC"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:buttonTint="@color/bluelightgreen" />
@@ -445,7 +307,7 @@
         </LinearLayout>
 
         <Button
-                android:id="@+id/btnHoanTat"
+                android:id="@+id/btnHoanTat2"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_marginTop="24dp"
