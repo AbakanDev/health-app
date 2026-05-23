@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
-import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.truyvetyte.network.RetrofitClient
@@ -26,17 +25,8 @@ class LichSuTruyVet : Fragment() {
     private lateinit var tvF2Count: TextView
     private lateinit var tvTotalContactCount: TextView
 
-    // Views cho Lịch Sử Tiếp Xúc - Item 1
-    private lateinit var cvContactItem1: CardView
-    private lateinit var tvContactLevel1: TextView
-    private lateinit var tvContactLocation1: TextView
-    private lateinit var tvContactTime1: TextView
-
-    // Views cho Lịch Sử Tiếp Xúc - Item 2
-    private lateinit var cvContactItem2: CardView
-    private lateinit var tvContactLevel2: TextView
-    private lateinit var tvContactLocation2: TextView
-    private lateinit var tvContactTime2: TextView
+    // Container cho Lịch Sử Tiếp Xúc động
+    private lateinit var llContactContainer: LinearLayout
 
     // Views cho Tổng Quan Khu Vực
     private lateinit var tvDangerAreaCount: TextView
@@ -60,16 +50,8 @@ class LichSuTruyVet : Fragment() {
         tvF2Count = view.findViewById(R.id.tvF2Count)
         tvTotalContactCount = view.findViewById(R.id.tvTotalContactCount)
 
-        // 2. Ánh xạ View Lịch Sử Tiếp Xúc
-        cvContactItem1 = view.findViewById(R.id.cvContactItem1)
-        tvContactLevel1 = view.findViewById(R.id.tvContactLevel1)
-        tvContactLocation1 = view.findViewById(R.id.tvContactLocation1)
-        tvContactTime1 = view.findViewById(R.id.tvContactTime1)
-
-        cvContactItem2 = view.findViewById(R.id.cvContactItem2)
-        tvContactLevel2 = view.findViewById(R.id.tvContactLevel2)
-        tvContactLocation2 = view.findViewById(R.id.tvContactLocation2)
-        tvContactTime2 = view.findViewById(R.id.tvContactTime2)
+        // 2. Ánh xạ View Container Lịch Sử Tiếp Xúc
+        llContactContainer = view.findViewById(R.id.llContactContainer)
 
         // 3. Ánh xạ View Tổng Quan Khu Vực (Check-in)
         tvDangerAreaCount = view.findViewById(R.id.tvDangerAreaCount)
@@ -330,20 +312,119 @@ class LichSuTruyVet : Fragment() {
                         if (body != null && body.success && !body.data.isNullOrEmpty()) {
                             val listData = body.data
 
-                            // Gán dữ liệu cho Item 1 (nếu có)
-                            if (listData.isNotEmpty()) {
-                                cvContactItem1.visibility = View.VISIBLE
-                                tvContactLevel1.text = listData[0].capDoDichTeHienTai ?: "An Toàn"
-                                tvContactLocation1.text = listData[0].diaDiemTiepXuc ?: "Không rõ"
-                                tvContactTime1.text = listData[0].thoiGianTiepXuc ?: "Không rõ"
-                            }
+                            // Xoá hết item cũ trong container rồi build lại từ đầu
+                            llContactContainer.removeAllViews()
 
-                            // Gán dữ liệu cho Item 2 (nếu có)
-                            if (listData.size > 1) {
-                                cvContactItem2.visibility = View.VISIBLE
-                                tvContactLevel2.text = listData[1].capDoDichTeHienTai ?: "An Toàn"
-                                tvContactLocation2.text = listData[1].diaDiemTiepXuc ?: "Không rõ"
-                                tvContactTime2.text = listData[1].thoiGianTiepXuc ?: "Không rõ"
+                            listData.forEach { item ->
+                                val level = item.capDoDichTeHienTai ?: "F2"
+
+                                // Màu sắc theo cấp độ dịch tễ
+                                val (borderColor, badgeBg, badgeTextColor) = when (level) {
+                                    "F0" -> Triple("#D32F2F", "#EF9A9A", "#B71C1C")
+                                    "F1" -> Triple("#B55AE0", "#E8B8FA", "#B55AE0")
+                                    else -> Triple("#42A5F5", "#BBDEFB", "#1565C0") // F2
+                                }
+
+                                // CardView ngoài
+                                val outerCard = androidx.cardview.widget.CardView(requireContext()).apply {
+                                    layoutParams = LinearLayout.LayoutParams(
+                                        LinearLayout.LayoutParams.MATCH_PARENT,
+                                        LinearLayout.LayoutParams.WRAP_CONTENT
+                                    ).also { it.setMargins(4, 4, 4, 4) }
+                                    radius = 8f * resources.displayMetrics.density
+                                    cardElevation = 3f * resources.displayMetrics.density
+                                }
+
+                                // Row ngoài (horizontal)
+                                val rowOuter = LinearLayout(requireContext()).apply {
+                                    layoutParams = LinearLayout.LayoutParams(
+                                        LinearLayout.LayoutParams.MATCH_PARENT,
+                                        LinearLayout.LayoutParams.WRAP_CONTENT
+                                    )
+                                    orientation = LinearLayout.HORIZONTAL
+                                }
+
+                                // Thanh màu bên trái
+                                val leftBorder = View(requireContext()).apply {
+                                    layoutParams = LinearLayout.LayoutParams(
+                                        (6 * resources.displayMetrics.density).toInt(),
+                                        LinearLayout.LayoutParams.MATCH_PARENT
+                                    )
+                                    setBackgroundColor(Color.parseColor(borderColor))
+                                }
+
+                                // Row nội dung (horizontal, padding)
+                                val rowInner = LinearLayout(requireContext()).apply {
+                                    layoutParams = LinearLayout.LayoutParams(
+                                        LinearLayout.LayoutParams.MATCH_PARENT,
+                                        LinearLayout.LayoutParams.WRAP_CONTENT
+                                    )
+                                    orientation = LinearLayout.HORIZONTAL
+                                    gravity = android.view.Gravity.CENTER_VERTICAL
+                                    val p = (12 * resources.displayMetrics.density).toInt()
+                                    setPadding(p, p, p, p)
+                                }
+
+                                // Badge F0/F1/F2 (bên trái)
+                                val badgeCard = androidx.cardview.widget.CardView(requireContext()).apply {
+                                    val w = (50 * resources.displayMetrics.density).toInt()
+                                    val h = (40 * resources.displayMetrics.density).toInt()
+                                    layoutParams = LinearLayout.LayoutParams(w, h).also {
+                                        it.marginEnd = (12 * resources.displayMetrics.density).toInt()
+                                    }
+                                    radius = 6f * resources.displayMetrics.density
+                                    cardElevation = 0f
+                                    setCardBackgroundColor(Color.parseColor(badgeBg))
+                                }
+
+                                val tvLevel = TextView(requireContext()).apply {
+                                    layoutParams = LinearLayout.LayoutParams(
+                                        LinearLayout.LayoutParams.MATCH_PARENT,
+                                        LinearLayout.LayoutParams.MATCH_PARENT
+                                    )
+                                    text = level
+                                    setTextColor(Color.parseColor(badgeTextColor))
+                                    setTypeface(null, android.graphics.Typeface.BOLD)
+                                    textSize = 18f
+                                    gravity = android.view.Gravity.CENTER
+                                }
+
+                                // Cột tên + giờ (bên phải, weight=1, gravity=end)
+                                val colText = LinearLayout(requireContext()).apply {
+                                    layoutParams = LinearLayout.LayoutParams(
+                                        0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f
+                                    )
+                                    orientation = LinearLayout.VERTICAL
+                                    gravity = android.view.Gravity.END
+                                }
+
+                                val tvLocation = TextView(requireContext()).apply {
+                                    text = item.diaDiemTiepXuc ?: "Không rõ"
+                                    setTextColor(Color.parseColor("#64B5F6"))
+                                    textSize = 16f
+                                    setTypeface(null, android.graphics.Typeface.BOLD)
+                                }
+
+                                val tvTime = TextView(requireContext()).apply {
+                                    text = item.thoiGianTiepXuc ?: "Không rõ"
+                                    setTextColor(Color.parseColor("#90CAF9"))
+                                    textSize = 14f
+                                    (layoutParams as? LinearLayout.LayoutParams)?.topMargin = 2
+                                }
+
+                                // Lắp ráp
+                                badgeCard.addView(tvLevel)
+                                colText.addView(tvLocation)
+                                colText.addView(tvTime)
+
+                                rowInner.addView(badgeCard)
+                                rowInner.addView(colText)
+
+                                rowOuter.addView(leftBorder)
+                                rowOuter.addView(rowInner)
+
+                                outerCard.addView(rowOuter)
+                                llContactContainer.addView(outerCard)
                             }
                         }
                     } else {
