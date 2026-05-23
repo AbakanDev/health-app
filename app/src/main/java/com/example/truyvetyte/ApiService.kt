@@ -88,4 +88,10 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("cccd") cccd: String
     ): Response<CheckinHistoryResponse>
+
+    @GET("api/health/health-declaration-history/{cccd}")
+    suspend fun getKhaiBaoHistory(
+        @Header("Authorization") token: String,
+        @Path("cccd") cccd: String
+    ): Response<com.example.truyvetyte.model.KhaiBaoHistoryResponse>
 }
