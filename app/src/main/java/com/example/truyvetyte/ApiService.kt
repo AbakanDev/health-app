@@ -8,8 +8,10 @@ import com.example.truyvetyte.model.CheckinHistoryResponse
 import com.example.truyvetyte.model.CheckinStatsResponse
 import com.example.truyvetyte.model.ContactHistoryResponse
 import com.example.truyvetyte.model.ContactStatsResponse
+import com.example.truyvetyte.model.CuaKhauListResponse
 import com.example.truyvetyte.model.DashboardSummaryResponse
 import com.example.truyvetyte.model.HealthResponse
+import com.example.truyvetyte.model.ImmigrationSubmitResponse
 import com.example.truyvetyte.model.KhaiBaoRequest
 import com.example.truyvetyte.model.KhaiBaoSubmitResponse
 import com.example.truyvetyte.model.RegisterModels
@@ -108,4 +110,18 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Path("cccd") cccd: String
     ): Response<com.example.truyvetyte.model.ImmigrationHistoryResponse>
+
+    @GET("api/health/cua-khau")
+    suspend fun getCuaKhauList(
+        @Header("Authorization") token: String
+    ): Response<CuaKhauListResponse>
+
+    @POST("api/health/immigration-declaration")
+    suspend fun submitImmigrationDeclaration(
+        @Header("Authorization") token: String,
+        @Body body: Map<String, String>
+    ): Response<ImmigrationSubmitResponse>
+
+
+
 }
