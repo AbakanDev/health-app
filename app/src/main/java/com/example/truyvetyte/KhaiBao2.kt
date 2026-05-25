@@ -323,55 +323,72 @@ class KhaiBao2 : Fragment() {
         setBackgroundColor(0xFFE0E0E0.toInt())
     }
 
-    private fun buildHistoryRow(item: ImmigrationHistoryItem): RelativeLayout {
-        val row = RelativeLayout(requireContext()).apply {
+    private fun buildHistoryRow(item: ImmigrationHistoryItem): LinearLayout {
+        // 1. Tạo container chính dạng Ngang (Horizontal)
+        val row = LinearLayout(requireContext()).apply {
+            orientation = LinearLayout.HORIZONTAL
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
             )
             setPadding(16.dpToPx(), 12.dpToPx(), 16.dpToPx(), 12.dpToPx())
+            gravity = android.view.Gravity.CENTER_VERTICAL // Căn giữa các item theo chiều dọc
+        }
+
+        // 2. Tạo container bên trái dạng Dọc (Vertical) để chứa Tên cửa khẩu & Thời gian
+        val leftContainer = LinearLayout(requireContext()).apply {
+            orientation = LinearLayout.VERTICAL
+            layoutParams = LinearLayout.LayoutParams(
+                0, // Để width = 0 và dùng weight
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                1f // Chiếm toàn bộ khoảng trống còn lại bên trái
+            )
         }
 
         val tvCuaKhau = TextView(requireContext()).apply {
-            id = View.generateViewId()
             text = "📍 ${item.tenCuaKhau} (${item.loaiCuaKhau})"
             textSize = 18f
             setTextColor(0xFF79A9F5.toInt())
             setTypeface(typeface, Typeface.BOLD)
-            layoutParams = RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.WRAP_CONTENT,
-                RelativeLayout.LayoutParams.WRAP_CONTENT
-            ).also { it.addRule(RelativeLayout.ALIGN_PARENT_START) }
         }
 
         val tvThoiGian = TextView(requireContext()).apply {
-            id = View.generateViewId()
             text = "${item.ngay} - ${item.gio}"
             textSize = 14f
             setTextColor(0xFF92BEFA.toInt())
             setTypeface(typeface, Typeface.BOLD)
-            layoutParams = RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.WRAP_CONTENT,
-                RelativeLayout.LayoutParams.WRAP_CONTENT
-            ).also { p -> p.addRule(RelativeLayout.BELOW, tvCuaKhau.id); p.topMargin = 6.dpToPx() }
+            layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            ).also { p -> p.topMargin = 6.dpToPx() }
         }
 
+        leftContainer.addView(tvCuaKhau)
+        leftContainer.addView(tvThoiGian)
+
+        // 3. TextView Trạng thái ở bên phải (Xử lý xuống dòng cực chuẩn)
         val tvTrangThai = TextView(requireContext()).apply {
-            text = "Trạng thái: ${item.trangThaiCuaKhau}"
+            // Thêm dấu \n để chủ động xuống dòng nhìn cho gọn gàng, chuyên nghiệp
+            text = "Trạng thái:\n${item.trangThaiCuaKhau}"
             textSize = 14f
             setTextColor(0xFF666666.toInt())
-            layoutParams = RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.WRAP_CONTENT,
-                RelativeLayout.LayoutParams.WRAP_CONTENT
+            gravity = android.view.Gravity.END // Căn lề chữ bên phải
+
+            // Ép chữ xuống dòng nếu text quá dài vượt quá khoảng 120dp
+            maxWidth = 120.dpToPx()
+
+            layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
             ).also { p ->
-                p.addRule(RelativeLayout.ALIGN_PARENT_END)
-                p.addRule(RelativeLayout.CENTER_VERTICAL)
+                p.marginStart = 12.dpToPx() // Tạo khoảng cách an toàn với bên trái
             }
         }
 
-        row.addView(tvCuaKhau)
-        row.addView(tvThoiGian)
+        // Add các block vào row chính
+        row.addView(leftContainer)
         row.addView(tvTrangThai)
+
         return row
     }
 
